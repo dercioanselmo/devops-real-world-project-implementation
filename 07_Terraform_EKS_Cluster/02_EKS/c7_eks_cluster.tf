@@ -24,6 +24,29 @@ resource "aws_eks_cluster" "main" {
     public_access_cidrs = var.cluster_endpoint_public_access_cidrs
   }
 
-
+  #Define the service CIDR range used by Kubernetes service (Optional)
+  kubernetes_network_config {
+    service_ipv4_cidr = var.cluster_service_ipv4_cidr
+  }
   
+  #Enable EKS control plane logging for visibility and debugging
+  enabled_cluster_log_types = [ 
+    "api",          # API Server audit logs
+    "audit",        # Kubernetes audit logs
+    "authenticator", # Authenticator logs for IAM auth
+    "controllerManager",
+    "scheduler"     # Logs for pod scheduling
+
+  ]
+
+  # Ensure IAM policy attachments complete before cluster creation
+  depends_on = [ 
+    aws_iam_role_policy_attachment.eks_cluster_policy,
+    aws_iam_role_policy_attachment.eks_vpc_resource_controller
+   ]
+
+   tags = var.tags
+
+   
+
 }
