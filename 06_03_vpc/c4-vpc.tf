@@ -35,8 +35,23 @@ resource "aws_subnet" "private" {
 }
 
 # Elastic IP for NAT Gateway
+resource "aws_eip" "nat" {
+    tags = merge(var.tags, { Name = "${var.environment_name}-nat-iip"})
+}
 
 # NAT Gateway
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.example.id # TODO: Get from the multiple subnets created.
+
+  tags = {
+    Name = "gw NAT"
+  }
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.example]
+}
 
 # Public Route Table
 
