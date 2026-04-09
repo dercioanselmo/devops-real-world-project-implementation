@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
 }
 
 # Attach VPC Resource Controller policy
-# Required for advanced networking, fargate, and Karpenter support
+# Required for advanced networking, Fargate, and Karpenter support
 # Recomended to include by default for production ready EKS
 resource "aws_iam_role_policy_attachment" "eks_vpc_resource_controller" {
   role       = aws_iam_role.eks_cluster.name

@@ -25,7 +25,7 @@ variable "cluster_name" {
 variable "cluster_version" {
   description = "Kubernetes minor version to use for the EKS Cluster. (e.g. 1.28, 1.29)"
   type        = string
-  default     = null
+  default     = null # Null  makes AWS assume the last Kubernetes available today. However this will be overwritten by the version assigned at terraform.tfvars file
 }
 
 variable "cluster_service_ipv4_cidr" {
