@@ -67,7 +67,7 @@ resource "aws_route_table" "public_rt" {
   tags = merge(var.tags, { Name = "${var.environment_name}-public-rt"})
 }
 
-# Public Route Table Associated to Oublic Subnet
+# Public Route Table Associated to Public Subnet
 resource "aws_route_table_association" "public_rt_assoc" {
   for_each = aws_subnet.public
   subnet_id      = each.value.id
