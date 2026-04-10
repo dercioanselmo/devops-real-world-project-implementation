@@ -47,6 +47,23 @@ resource "aws_eks_cluster" "main" {
 
    tags = var.tags
 
-   
+   # Access config - How do we control who can access our EKS cluster
+   #
+   # authenticate_mode = "API_AND_CONFIG_MAP"
+   # --> Thie means we are using both methods
+   # 1. The old way (aws-auth ConfigMap) - still works
+   # 2. The new way (Access Entries API) - future-proof for AWS directions
+   #
+   # bootstrap+cluster_creator_admin_permissions = true
+   # --> This makes sure the person who creates the cluster (Running the Terraform) automatically gets admin (cluster-admin) access.
+   #
+   # Simply:
+   # - Keep the old system so everthing works today
+   # - Enable the new system so the cluster is future-ready
+   # - And guaranteed access to the creator allways have admin access
+   access_config {
+     authentication_mode = "API_AND_CONFIG_MAP"
+     bootstrap_cluster_creator_admin_permissions = true
+   }
 
 }
