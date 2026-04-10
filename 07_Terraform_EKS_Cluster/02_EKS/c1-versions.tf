@@ -6,16 +6,12 @@ terraform {
       source  = "hashicorp/aws"
       version = "~>6.0" #Provider version
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "~>3.0"
-    }
   }
 
-  # Remote Backend
+  # Remote Backend configuration using S3
   backend "s3" {
     bucket = "tfstate-dev-us-east-1-zoa8dy"
-    key = "vpc/dev/terraform.tfstate"
+    key = "eks/dev/terraform.tfstate"
     region = "us-east-1" # Variables still not allowed in the terraform block
     encrypt = true
     use_lockfile = true
