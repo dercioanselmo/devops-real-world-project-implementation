@@ -7,10 +7,10 @@ resource "aws_iam_role" "eks_cluster" {
 
   #Trust policy to allow EKS to assume this role
   assume_role_policy = jsonencode({
-    Version = "2012-10-17",
+    Version = "2012-10-17"
     Statement = [{
-        Action    = "sts:AssumeRole",
-        Effect    = "Allow",
+        Action    = "sts:AssumeRole"
+        Effect    = "Allow"
         Principal = {
           service = "eks.amazonaws.com"  # Only this service can assume this role
         }
