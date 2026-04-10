@@ -45,6 +45,6 @@ output "eks_node_instance_role_arn" {
 # Output command to configure kubectl for EKS cluster
 # Can be runned directly after apply, to configure kubectl client on local machine to access the cluster
 output "to_configure_kubectl" {
-  value = "aws eks --region ${var.aws_region} update_kubeconfig --name ${local.eks_cluster_name}"
+  value = "aws eks --region ${var.aws_region} update-kubeconfig --name ${local.eks_cluster_name}"
   description = "Command to update local kubeconfig to connect to the EKS cluster"
 }
