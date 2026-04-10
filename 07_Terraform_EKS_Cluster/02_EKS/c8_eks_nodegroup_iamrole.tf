@@ -27,11 +27,11 @@ resource "aws_iam_role_policy_attachment" "eks_worker_node_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
-# IAM Policy attachment: AmazonEKS_CNI_Policiy
+# IAM Policy attachment: AmazonEKS_CNI_Policy
 # Allows node to manage networking (ENIs) via VPC plugin. Without this, pods cannot have the IP in the cluster.
 resource "aws_iam_role_policy_attachment" "eks_cni_policy" {
   role       = aws_iam_role.eks_nodegroup_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policiy"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
 
