@@ -50,7 +50,7 @@ variable "cluster_endpoint_public_access" {
 variable "cluster_endpoint_public_access_cidrs" {
   description = "List of CIDR blocks allowed to access public EKS endpoint"
   type        = list(string)
-  default     = ("10.0.0.0/0")
+  default     = ["10.0.0.0/0"]
 }
 
 variable "tags" {
@@ -66,14 +66,14 @@ variable "tags" {
 variable "node_instance_types" {
   description = "List of EC2 instance types for the node group"
   type        = list(string)
-  default     = ("t3.medium")
+  default     = ["t3.medium"]
 }
 
 
 variable "node_capacity_type" {
   description = "Instance capacity type: ON_DEMAND or SPOT"
   type        = string
-  default     = ("ON_DEMAND")
+  default     = "ON_DEMAND"
 }
 
 variable "node_nock_size" {

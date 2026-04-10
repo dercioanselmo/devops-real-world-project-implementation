@@ -6,7 +6,7 @@ resource "aws_iam_role" "eks_cluster" {
   name = "${local.name}-eks-cluster-role"
 
   #Trust policy to allow EKS to assume this role
-  assume_role_policy = jsondecode({
+  assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
         Action    = "sts:AssumeRole",
