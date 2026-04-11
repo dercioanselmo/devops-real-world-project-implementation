@@ -14,9 +14,9 @@ terraform {
 
   # Remote Backend
   backend "s3" {
-    bucket = "tfstate-dev-us-east-1-zoa8dy"
+    bucket = "tfstate-dev-me-central-1-8xpzyk"
     key = "vpc/dev/terraform.tfstate"
-    region = "us-east-1" # Variables still not allowed in the terraform block
+    region = "me-central-1" # Variables still not allowed in the terraform block
     encrypt = true
     use_lockfile = true
   }
