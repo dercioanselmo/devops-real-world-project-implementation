@@ -39,6 +39,11 @@ resource "aws_eks_cluster" "main" {
 
   ]
 
+  timeouts {
+    create = "50m"
+    update = "60m"
+    delete = "30m"
+  }
   # Ensure IAM policy attachments complete before cluster creation
   depends_on = [ 
     aws_iam_role_policy_attachment.eks_cluster_policy,

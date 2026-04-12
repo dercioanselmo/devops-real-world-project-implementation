@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region to deploy resources"
   type        = string
-  default     = "me-central-1"
+  default     = "eu-central-1"
 }
 
 variable "environment_name" {

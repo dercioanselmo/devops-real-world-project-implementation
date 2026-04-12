@@ -10,9 +10,9 @@ terraform {
 
   # Remote Backend configuration using S3
   backend "s3" {
-    bucket = "tfstate-dev-me-central-1-8xpzyk"
+    bucket = "tfstate-dev-eu-central-1-a65beq"
     key = "eks/dev/terraform.tfstate"
-    region = "me-central-1" # Variables still not allowed in the terraform block
+    region = "eu-central-1" # Variables still not allowed in the terraform block
     encrypt = true
     use_lockfile = true
   }
