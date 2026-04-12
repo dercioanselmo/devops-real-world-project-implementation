@@ -24,7 +24,7 @@ spec:
         - name: catalog
           envFrom:
             - configMapRef:
-              name: catalog
+                name: catalog
           securityContext:
             capabilities:
               drop:
