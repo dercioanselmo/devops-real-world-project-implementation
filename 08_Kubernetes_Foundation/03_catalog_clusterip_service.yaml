@@ -9,7 +9,7 @@ spec:
   selector:
     app.kubernetes.io/name: catalog
   ports:
-  - name: http
-    port: 8080
-    protocol: 8080
-    targetPort: TCP
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
