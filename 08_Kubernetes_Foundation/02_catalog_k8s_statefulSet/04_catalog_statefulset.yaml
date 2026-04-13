@@ -36,7 +36,7 @@ spec:
             - name: MYSQL_USER
               value: catalog_user
             - name: MYSQL_PASSWORD
-              value: kalyandb101
+              value: derciodb101
           ports:
             - name: mysql
               containerPort: 3306
