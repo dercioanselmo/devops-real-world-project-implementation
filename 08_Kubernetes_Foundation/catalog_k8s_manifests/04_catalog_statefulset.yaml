@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/owner: retail-store-sample
 spec:
   replicas: 1
+  serviceName: catalog-mysql
   selector:
     matchLabels:
       app.kubernetes.io/name: catalog
