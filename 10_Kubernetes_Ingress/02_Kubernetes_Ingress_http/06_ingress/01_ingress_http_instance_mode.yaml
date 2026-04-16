@@ -20,6 +20,7 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
 spec:
   ingressClassName: alb 
+  # kubectl get ingressclass 
   defaultBackend:
     service:
       name: ui-np
