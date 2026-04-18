@@ -2,7 +2,6 @@
 **/.terraform/
 *.tfstate
 *.tfstate.backup
-*.tfvars
 *.tgz
 crash.log
 crash.*.log
