@@ -1,11 +1,17 @@
+# --------------------------------------------------------------------
 # Local values used throughout the EKS configuration
-# Helps reinforce naming consistency and reduce dupplication
+# Helps enforce naming consistency and reduce duplication
+# --------------------------------------------------------------------
 locals {
-  owners = var.business_division # Example: Retail
+  # Business division or team name (from variable)
+  owners = var.business_division  # Example: "retail"
 
-  environment = var.environment_name # Examole: dev
+  # Environment name such as dev, staging, prod (from variable)
+  environment = var.environment_name  # Example: "dev"
 
-  name = "${local.owners}-${var.environment_name}"  # Examole: retail-dev
+  # Standardized naming prefix: "<division>-<env>"
+  name = "${local.owners}-${local.environment}"  # Example: "retail-dev"
 
-  eks_cluster_name = "${local.name}-${var.cluster_name}"  # Examole: "retail-dev-eksdemo"
+  # Full EKS cluster name used for resource naming and tagging
+  eks_cluster_name = "${local.name}-${var.cluster_name}"  # Example: "retail-dev-eksdemo"
 }

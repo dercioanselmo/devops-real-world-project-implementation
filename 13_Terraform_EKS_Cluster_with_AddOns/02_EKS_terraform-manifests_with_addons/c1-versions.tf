@@ -1,23 +1,38 @@
-#Terraform Block
 terraform {
-  required_version = ">=1.0.0" #Terreform CLI version
+  # Minimum Terraform CLI version required
+  required_version = ">= 1.12.0"
+
+  # Required providers and version constraints
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~>6.0" #Provider version
+      version = ">= 6.0"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.38.0"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 3.1.0"
+    }
+    http = {
+      source  = "hashicorp/http"
+      version = "~> 3.5.0"
+    }    
   }
 
-  # Remote Backend configuration using S3
+  # Remote backend configuration using S3 
   backend "s3" {
-    bucket = "tfstate-dev-eu-central-1-a65beq"
-    key = "eks/dev/terraform.tfstate"
-    region = "eu-central-1" # Variables still not allowed in the terraform block
-    encrypt = true
-    use_lockfile = true
+    bucket         = "tfstate-dev-eu-central-1-a65beq"         
+    key            = "eks/dev/terraform.tfstate"            
+    region         = "eu-central-1"                            
+    encrypt        = true                                   
+    use_lockfile   = true     
   }
 }
 
 provider "aws" {
+  # AWS region to use for all resources (from variables)
   region = var.aws_region
 }

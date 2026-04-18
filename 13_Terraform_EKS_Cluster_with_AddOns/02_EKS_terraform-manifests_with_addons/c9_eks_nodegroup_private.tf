@@ -1,45 +1,45 @@
-# EKS Managed Node Group - In the privste subnet
+# EKS Managed Node Group - Private Subnets
 resource "aws_eks_node_group" "private_nodes" {
-  
-  # EKS Cluster Name
+
+  # The name of the EKS cluster this node group belongs to
   cluster_name = aws_eks_cluster.main.name
-  
-  # Logical name for this group in EKS Cluster
+
+  # Logical name for this node group in the EKS cluster
   node_group_name = "${local.name}-private-ng"
 
-  # IAM Role to be assumed by the worker nodes EC2 instances 
+  # IAM role that EC2 worker nodes will assume
   node_role_arn = aws_iam_role.eks_nodegroup_role.arn
 
-  # Subnet where worker nodes will be launched (Private subnet)
+  # Subnets where the worker nodes will be launched (typically private subnets)
   subnet_ids = data.terraform_remote_state.vpc.outputs.private_subnet_ids
 
-  # EC2 Instance types of worker nodes (t3.medium, m5.large, etc)
+  # Instance types for the nodes (e.g., t3.medium, m5.large)
   instance_types = var.node_instance_types
 
-  # ON_DEMAND or SPOT
+  # Choose between ON_DEMAND or SPOT capacity types
   capacity_type = var.node_capacity_type
 
-  # Use Amazon Linus AMI - Latest Amazon-Managed OS optimized for EKS
-  # Fully supported in Kubernetes v1.25+ 
-  # Better security updated packages and long-term support
+  # Use Amazon Linux 2023 AMI — the latest Amazon-managed OS optimized for EKS
+  # Fully supported in Kubernetes v1.25+ and production-ready
+  # Better security, updated packages, and long-term support (recommended over AL2)
   ami_type = "AL2023_x86_64_STANDARD"
 
-  # Role volume size for each node 
-  disk_size = var.node_nock_size
+  # Root volume size for each node (in GiB)
+  disk_size = var.node_disk_size
 
-  # configure auto-scaling limits and defaults
+  # Configure auto-scaling limits and defaults
   scaling_config {
-    #Desired number of nodes when the node group is created
-    desired_size = 2
+    # Desired number of nodes when the node group is created
+    desired_size = 3
 
     # Minimum number of nodes allowed
     min_size = 1
 
-    # Maximum number of nodes that the group can scale to
+    # Maximum number of nodes the group can scale to
     max_size = 6
   }
 
-  # set the max percentage of nodes that can be unavailable during updates
+  # Set the max percentage of nodes that can be unavailable during update
   update_config {
     max_unavailable_percentage = 33
   }
@@ -48,9 +48,8 @@ resource "aws_eks_node_group" "private_nodes" {
   force_update_version = true
 
   # Apply labels to each EC2 instance for easier scheduling and management in Kubernetes
-  # Optionnal, will allow latter, if necessary schedule pods by environment or team
   labels = {
-    "env" = var.environment_name
+    "env"  = var.environment_name
     "team" = var.business_division
   }
 
@@ -59,15 +58,14 @@ resource "aws_eks_node_group" "private_nodes" {
     # Standard EC2 name tag
     Name = "${local.name}-private-ng"
 
-    # Local environment (dev, qa, prod)
-    Environment =  var.environment_name
+    # Logical environment (e.g., dev, prod)
+    Environment = var.environment_name
   })
 
-  # Ensure IAM Role policies are attached before creating the node group
-  depends_on = [ 
+  # Ensure IAM role policies are attached before creating the node group
+  depends_on = [
     aws_iam_role_policy_attachment.eks_worker_node_policy,
     aws_iam_role_policy_attachment.eks_cni_policy,
     aws_iam_role_policy_attachment.eks_ecr_policy
-   ]
-
+  ]
 }
