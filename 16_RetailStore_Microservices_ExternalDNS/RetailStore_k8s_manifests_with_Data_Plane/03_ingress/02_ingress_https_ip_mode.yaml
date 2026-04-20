@@ -2,10 +2,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: retail-store-http-ip-mode
+  name: retail-store-https-ip-mode
   annotations:
     # Load Balancer Name
-    alb.ingress.kubernetes.io/load-balancer-name: retail-store-http-ip-mode
+    alb.ingress.kubernetes.io/load-balancer-name: retail-store-https-ip-mode
     # Ingress Core Settings
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
@@ -18,8 +18,15 @@ metadata:
     alb.ingress.kubernetes.io/success-codes: '200'
     alb.ingress.kubernetes.io/healthy-threshold-count: '2'
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    ## SSL Settings
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    # First Generate SSL Certificate via AWS Certificate Manager (ACM) for 
+    # "retailstore2.<YOURDOMAIN>.com" and update the ARN below before deploying this Ingress Service
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:652978908369:certificate/ac995844-5b24-4918-b0ae-7405c25d85fc
+    # SSL Redirect Setting
+    alb.ingress.kubernetes.io/ssl-redirect: '443'       
     # External DNS Annotation
-    external-dns.alpha.kubernetes.io/hostname: retailstore.dercioanselmo.com
+    external-dns.alpha.kubernetes.io/hostname: retailstore2.dercioanselmo.com
 spec:
   ingressClassName: alb 
   defaultBackend:
