@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: karpenter-autoscale-demo-spot
+  name: karpenter-autoscale-demo-ondemand
   labels:
-    demo: karpenter-spot
+    demo: karpenter-ondemand
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: autoscale-demo-spot
+      app: autoscale-demo
   template:
     metadata:
       labels:
-        app: autoscale-demo-spot
+        app: autoscale-demo
     spec:
-      # Strict targeting for Spot NodePool only (this eliminates the conflict)
+      # Force pods to on-demand nodes
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -22,18 +22,17 @@ spec:
             - matchExpressions:
               - key: karpenter.sh/nodepool
                 operator: In
-                values: ["spot-nodepool"]
+                values: ["ondemand-nodepool"]
               - key: karpenter.sh/capacity-type
                 operator: In
-                values: ["spot"]
-
+                values: ["on-demand"]     
       containers:
         - name: pause
           image: public.ecr.aws/eks-distro/kubernetes/pause:3.9
           resources:
             requests:
               cpu: "500m"
-              memory: "256Mi"
+              memory: "256Mi"  
             limits:
               cpu: "500m"
               memory: "256Mi"
