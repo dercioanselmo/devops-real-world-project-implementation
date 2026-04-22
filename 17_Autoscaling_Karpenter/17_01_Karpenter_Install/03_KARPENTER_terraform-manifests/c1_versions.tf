@@ -34,3 +34,9 @@ provider "aws" {
   # AWS region to use for all resources (from variables)
   region = var.aws_region
 }
+
+# Required for public ECR authorization token
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
+}

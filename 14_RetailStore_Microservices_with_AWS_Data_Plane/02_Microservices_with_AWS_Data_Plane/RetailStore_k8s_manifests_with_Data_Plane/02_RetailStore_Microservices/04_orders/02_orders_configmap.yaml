@@ -8,4 +8,4 @@ data:
   RETAIL_ORDERS_PERSISTENCE_NAME: ordersdb
   RETAIL_ORDERS_MESSAGING_PROVIDER: sqs
   RETAIL_ORDERS_MESSAGING_SQS_TOPIC: retail-dev-orders-queue
-  #RETAIL_ORDERS_MESSAGING_SQS_TOPIC: https://sqs.us-east-1.amazonaws.com/180789647333/retail-dev-orders-queue
+  #RETAIL_ORDERS_MESSAGING_SQS_TOPIC: https://sqs.us-east-1.amazonaws.com/652978908369/retail-dev-orders-queue

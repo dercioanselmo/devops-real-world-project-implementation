@@ -21,7 +21,7 @@ metadata:
     ## SSL Settings
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
     # First Generate SSL Certificate via AWS Certificate Manager (ACM) for 
-    # "retailstore2.<YOURDOMAIN>.com" and update the ARN below before deploying this Ingress Service
+    # "retailstore2.<THEDOMAIN>.com" and update the ARN below before deploying this Ingress Service
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:652978908369:certificate/ac995844-5b24-4918-b0ae-7405c25d85fc
     # SSL Redirect Setting
     alb.ingress.kubernetes.io/ssl-redirect: '443'       

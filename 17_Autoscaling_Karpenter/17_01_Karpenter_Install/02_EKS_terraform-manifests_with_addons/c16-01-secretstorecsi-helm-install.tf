@@ -19,7 +19,7 @@ resource "helm_release" "secrets_store_csi_driver" {
     # Fix the error: This error was noticed when creating the catalog pods in the EKS cluster
     # MountVolume.SetUp failed for volume "aws-secrets" : rpc error: code = Unknown desc = failed to mount secrets store objects for pod default/catalog-7b55c467cb-m54gr, err: rpc error: code = Unknown desc = Pod Identity token extraction failed: token for audience "pods.eks.amazonaws.com" not found - ensure tokenRequests includes this audience in CSIDriver
     {
-      name  = "linux.csidriver.tokenRequests[0].audience"
+      name  = "tokenRequests[0].audience"
       value = "pods.eks.amazonaws.com"
     }
     #The fix end here
