@@ -18,22 +18,14 @@ spec:
         - key: kubernetes.io/os
           operator: In
           values: ["linux"]
-        # Spot capacity (50-90% cheaper than on-demand)
-        # Note: Spot instances can be interrupted with 2-minute notice
-        # Best for fault-tolerant, stateless workloads        
         - key: karpenter.sh/capacity-type
           operator: In
           values: ["spot"]
-        # Multiple instance families for better spot availability
+        # Multiple families = much higher chance of finding Spot capacity
         - key: karpenter.k8s.aws/instance-family
           operator: In
-          values: ["t3", "t3a", "t2", "c5a", "c6a"]
-        # Allow micro to large - flexibility helps find available spot capacity
-        - key: karpenter.k8s.aws/instance-size
-          operator: In
-          values: ["micro", "small", "medium", "large"]
-        # Must match the AZs where the EKS cluster has subnets configured
-        # Karpenter can only launch nodes in AZs with configured VPC subnets
+          values: ["t3", "t3a", "t2", "c5a", "c6a", "m5", "m6a"]   # added m5/m6a for better availability
+        # ←←← REMOVED the instance-size block completely (this is the key fix)
         - key: topology.kubernetes.io/zone
           operator: In
           values: ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
@@ -42,10 +34,9 @@ spec:
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 30s
-    # Add budgets to control disruption rate
     budgets:
-      - nodes: "100%"  # Allow all nodes to be disrupted if needed
+      - nodes: "100%"
         reasons:
           - "Drifted"
           - "Underutilized"
-          - "Empty"    
+          - "Empty"

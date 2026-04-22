@@ -5,7 +5,7 @@ metadata:
   labels:
     demo: karpenter-spot
 spec:
-  replicas: 5  # 5 pods = ~2.5 vCPUs needed
+  replicas: 5
   selector:
     matchLabels:
       app: autoscale-demo-spot
@@ -14,16 +14,26 @@ spec:
       labels:
         app: autoscale-demo-spot
     spec:
-      # THIS IS CRITICAL - Forces pods to run ONLY on Spot nodes
-      nodeSelector:
-        karpenter.sh/capacity-type: spot    
+      # Strict targeting for Spot NodePool only (this eliminates the conflict)
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: karpenter.sh/nodepool
+                operator: In
+                values: ["spot-nodepool"]
+              - key: karpenter.sh/capacity-type
+                operator: In
+                values: ["spot"]
+
       containers:
         - name: pause
           image: public.ecr.aws/eks-distro/kubernetes/pause:3.9
           resources:
             requests:
-              cpu: "500m"      # 0.5 vCPU per pod
-              memory: "256Mi"  # 256MB per pod
+              cpu: "500m"
+              memory: "256Mi"
             limits:
               cpu: "500m"
               memory: "256Mi"

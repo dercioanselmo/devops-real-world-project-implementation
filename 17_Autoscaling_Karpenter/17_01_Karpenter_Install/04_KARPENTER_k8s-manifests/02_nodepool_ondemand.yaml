@@ -32,7 +32,7 @@ spec:
         # Limit to smaller sizes only
         - key: karpenter.k8s.aws/instance-size
           operator: In
-          values: ["micro", "small", "medium", "large"]  # Caps at t3.medium (2 vCPU, 4GB RAM)
+          values: ["small", "medium", "large", "xlarge"]  # Caps at t3.medium (2 vCPU, 4GB RAM)
         # Must match the AZs where the EKS cluster has subnets configured
         # Karpenter can only launch nodes in AZs with configured VPC subnets
         - key: topology.kubernetes.io/zone
