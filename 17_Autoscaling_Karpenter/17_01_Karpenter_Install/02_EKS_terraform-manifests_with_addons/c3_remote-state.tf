@@ -7,7 +7,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     bucket = "tfstate-dev-eu-central-1-a65beq"     # Name of the remote S3 bucket where the VPC state is stored
     key    = "vpc/dev/terraform.tfstate"        # Path to the VPC tfstate file within the bucket
-    region = var.aws_region                    # Region where the S3 bucket and DynamoDB table exist
+    region = var.aws_region_remote_state                   # Region where the S3 bucket and DynamoDB table exist
   }
 }
 
