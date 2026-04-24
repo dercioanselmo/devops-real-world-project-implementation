@@ -10,10 +10,8 @@ resource "aws_iam_service_linked_role" "ec2_spot" {
   description      = "Service-linked role for EC2 Spot Instances used by Karpenter"
 
   # This resource is idempotent — if the role already exists, Terraform will just manage it
-  # (no force new unless you change the service name)
 }
 
-# Optional: Also create the Spot Fleet one (recommended for completeness)
 resource "aws_iam_service_linked_role" "ec2_spot_fleet" {
   aws_service_name = "spotfleet.amazonaws.com"
   description      = "Service-linked role for EC2 Spot Fleet"

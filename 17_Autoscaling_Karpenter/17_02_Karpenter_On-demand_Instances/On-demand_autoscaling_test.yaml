@@ -5,7 +5,7 @@ metadata:
   labels:
     demo: karpenter-ondemand
 spec:
-  replicas: 5
+  replicas: 10
   selector:
     matchLabels:
       app: autoscale-demo

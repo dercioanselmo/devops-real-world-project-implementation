@@ -28,7 +28,8 @@ spec:
         # Cheaper, smaller instance families
         - key: karpenter.k8s.aws/instance-family
           operator: In
-          values: ["t3", "t3a", "m5", "m6i", "c5", "c6i"]  # All burstable, budget-friendly
+          values: ["t3", "t3a", "c5", "c5a", "c6i", "m5", "m6i"]  # All burstable, budget-friendly
+          #values: ["t3", "t3a", "m5", "m6i", "c5", "c6i", "c7i"]
         # Limit to smaller sizes only
         - key: karpenter.k8s.aws/instance-size
           operator: In
