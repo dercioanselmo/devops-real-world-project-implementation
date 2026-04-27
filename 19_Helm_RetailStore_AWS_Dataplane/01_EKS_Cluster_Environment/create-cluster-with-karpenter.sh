@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+alias terraform='docker run --rm -it -v $(pwd):/workspace -v ~/.aws:/root/.aws -e AWS_PROFILE -e AWS_REGION -w /workspace hashicorp/terraform:latest'
 
 echo "==============================="
 echo "STEP-1: Create VPC using Terraform"
