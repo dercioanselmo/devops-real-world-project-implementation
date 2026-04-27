@@ -18,14 +18,19 @@ mysql:
 app:
   persistence:
     provider: mysql
-    endpoint: "mydb3.cs1824wy44gd.us-east-1.rds.amazonaws.com"
+    endpoint: "mydb3.cxojydmxwly6.us-east-1.rds.amazonaws.com"
     database: "catalogdb"
 
     secret:
-      create: true
+      create: false  # ← CRITICAL: Don't create static secret
       name: catalog-db
-      username: mydbadmin
-      password: derciodb101
+      username: ""  # Not used when useSecretsManager=true
+      password: ""  # Not used when useSecretsManager=true
+      
+      useSecretsManager: true  # Enable Secrets Manager
+      secretsManager:
+        secretName: "retailstore-db-secret-1"
+        region: "us-east-1"      
 
 # ----------------------------------------------------------------------------
 # RESOURCE MANAGEMENT

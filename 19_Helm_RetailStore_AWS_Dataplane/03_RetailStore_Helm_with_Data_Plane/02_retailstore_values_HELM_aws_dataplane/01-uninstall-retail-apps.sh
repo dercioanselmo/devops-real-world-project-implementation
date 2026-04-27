@@ -6,7 +6,7 @@ echo
 # Step 05 - UI Service
 echo "Uninstalling UI Service..."
 helm uninstall ui
-#sleep 10
+sleep 10
 
 # Step 04 - Orders Service
 echo "Uninstalling Orders Service..."
@@ -20,7 +20,7 @@ sleep 10
 
 # Step 02 - Cart Service
 echo "Uninstalling Cart Service..."
-helm uninstall cart
+helm uninstall carts
 sleep 10
 
 # Step 01 - Catalog Service
@@ -30,3 +30,13 @@ sleep 10
 
 echo
 echo "All Helm uninstalls completed!"
+
+echo
+echo "============================================"
+echo "Uninstallation Summary"
+echo "============================================"
+
+# List Helm Releases
+echo
+echo "Should not see any Retail Store Helm Releases:"
+helm list
