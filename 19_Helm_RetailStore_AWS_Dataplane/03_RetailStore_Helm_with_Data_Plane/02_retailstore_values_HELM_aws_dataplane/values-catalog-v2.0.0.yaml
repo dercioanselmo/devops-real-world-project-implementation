@@ -18,7 +18,7 @@ mysql:
 app:
   persistence:
     provider: mysql
-    endpoint: "mydb3.cxojydmxwly6.us-east-1.rds.amazonaws.com"
+    endpoint: "mydb3.cs1824wy44gd.us-east-1.rds.amazonaws.com"
     database: "catalogdb"
 
     secret:

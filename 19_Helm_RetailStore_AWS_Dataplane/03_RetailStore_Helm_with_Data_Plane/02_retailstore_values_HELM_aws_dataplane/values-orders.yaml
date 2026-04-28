@@ -20,7 +20,7 @@ postgresql:
 app:
   persistence:
     provider: postgres
-    endpoint: orders-postgres-db.cxojydmxwly6.us-east-1.rds.amazonaws.com:5432
+    endpoint: orders-postgres-db.cs1824wy44gd.us-east-1.rds.amazonaws.com:5432
     database: ordersdb
 
     secret:
@@ -53,19 +53,19 @@ rabbitmq:
 # ----------------------------------------------------------------------------
 resources:
   limits:
-    cpu: 512m
-    memory: 512Mi
+    cpu: 250m
+    memory: 256Mi
   requests:
-    cpu: 100m
-    memory: 500Mi
+    cpu: 50m
+    memory: 128Mi
     
 # ----------------------------------------------------------------------------
 # AUTOSCALING - HORIZONTAL POD AUTOSCALER (HPA)
 # ----------------------------------------------------------------------------
 autoscaling:
   enabled: true
-  minReplicas: 3
-  maxReplicas: 10
+  minReplicas: 1
+  maxReplicas: 4
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
@@ -74,7 +74,7 @@ autoscaling:
 # ----------------------------------------------------------------------------
 # Schedule pods on Karpenter On-Demand nodes for stability
 nodeSelector:
-  karpenter.sh/capacity-type: on-demand
+  karpenter.sh/capacity-type: spot
 
 # ----------------------------------------------------------------------------
 # TOPOLOGY SPREAD CONSTRAINTS

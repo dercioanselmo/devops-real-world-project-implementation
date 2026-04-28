@@ -20,7 +20,7 @@ postgresql:
 app:
   persistence:
     provider: postgres
-    endpoint: orders-postgres-db.cxojydmxwly6.us-east-1.rds.amazonaws.com:5432
+    endpoint: orders-postgres-db.cs1824wy44gd.us-east-1.rds.amazonaws.com:5432
     database: ordersdb
 
     secret:

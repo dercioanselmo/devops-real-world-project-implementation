@@ -32,19 +32,19 @@ app:
 # ----------------------------------------------------------------------------
 resources:
   limits:
-    cpu: 512m
-    memory: 512Mi
-  requests:
-    cpu: 100m
+    cpu: 250m
     memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
     
 # ----------------------------------------------------------------------------
 # AUTOSCALING - HORIZONTAL POD AUTOSCALER (HPA)
 # ----------------------------------------------------------------------------
 autoscaling:
   enabled: true
-  minReplicas: 3
-  maxReplicas: 12
+  minReplicas: 1
+  maxReplicas: 4
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
@@ -53,7 +53,7 @@ autoscaling:
 # ----------------------------------------------------------------------------
 # Schedule pods on Karpenter On-Demand nodes for stability
 nodeSelector:
-  karpenter.sh/capacity-type: on-demand
+  karpenter.sh/capacity-type: spot
 
 # ----------------------------------------------------------------------------
 # TOPOLOGY SPREAD CONSTRAINTS
