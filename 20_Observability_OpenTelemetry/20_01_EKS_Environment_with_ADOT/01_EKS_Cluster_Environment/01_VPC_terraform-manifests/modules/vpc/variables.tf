@@ -1,9 +1,3 @@
-variable "aws_region" {
-  description = "AWS region to deploy resources"
-  type        = string
-  default     = "me-central-1"
-}
-
 variable "environment_name" {
   description = "Environment name used in resource names and tags"
   type        = string

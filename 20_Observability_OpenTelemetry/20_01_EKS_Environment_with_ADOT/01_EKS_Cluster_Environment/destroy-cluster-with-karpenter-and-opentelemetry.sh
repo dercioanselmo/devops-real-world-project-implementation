@@ -1,6 +1,20 @@
 #!/bin/bash
 set -e
 
+echo
+echo "========================================================"
+echo "STEP-00: Destroy Open Telemetry Operator - Terraform"
+echo "==============================================="
+cd 05_OPENTELEMTRY_terraform-manifests
+terraform init
+terraform destroy -auto-approve
+rm -rf .terraform .terraform.lock.hcl
+echo 
+echo "✅ Open Telemetry Terraform destroyed"
+
+
+
+
 echo "==============================="
 echo "STEP-1: Check kubeconfig"
 echo "==============================="
@@ -37,7 +51,7 @@ echo
 echo "==============================="
 echo "STEP-3: Delete Spot NodePool"
 echo "==============================="
-cd 04_KARPENTER_k8s-manifests
+cd ../04_KARPENTER_k8s-manifests
 kubectl delete -f 03_nodepool_spot.yaml --ignore-not-found
 echo "✅ Spot NodePool deleted"
 

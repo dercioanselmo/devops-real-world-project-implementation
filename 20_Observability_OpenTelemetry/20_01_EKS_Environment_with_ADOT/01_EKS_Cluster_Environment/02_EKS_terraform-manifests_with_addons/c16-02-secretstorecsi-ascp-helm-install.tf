@@ -17,7 +17,12 @@ resource "helm_release" "aws_secrets_provider" {
     {
     name  = "secrets-store-csi-driver.install"
     value = "false"
-  }
+    },
+    # Add toleration
+    {
+    name  = "tolerations[0].operator"
+    value = "Exists"
+    }
   ]
 
   # Wait for all pods to become ready

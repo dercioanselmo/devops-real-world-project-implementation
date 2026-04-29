@@ -12,7 +12,7 @@ provider "helm" {
   }
 }
 
-# Terraform Kubernetes Provider (Not so relevant now, as Kubernetes resources are not defined using Terraform at this project)
+# Terraform Kubernetes Provider (Will be using Terraform to create EKS cluster resources, insted of helm)
 provider "kubernetes" {
   host = aws_eks_cluster.main.endpoint 
   cluster_ca_certificate = base64decode(aws_eks_cluster.main.certificate_authority[0].data)

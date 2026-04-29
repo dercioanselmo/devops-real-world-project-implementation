@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-alias terraform='docker run --rm -it -v $(pwd):/workspace -v ~/.aws:/root/.aws -e AWS_PROFILE -e AWS_REGION -w /workspace hashicorp/terraform:latest'
 
 echo "==============================="
 echo "STEP-1: Create VPC using Terraform"
@@ -110,6 +109,19 @@ echo
 echo "✅ All Karpenter manifests applied successfully!"
 
 echo
+echo "========================================================"
+echo "STEP-8: Install Open Telemetry Operator using Terraform"
+echo "==============================================="
+cd ../05_OPENTELEMTRY_terraform-manifests
+terraform init
+terraform apply -auto-approve
+
+echo
+echo "✅ All Open Telemetry Terraform manifests applied successfully!"
+
+
+
+echo
 echo "==============================="
 echo "SUMMARY"
 echo "==============================="
@@ -121,6 +133,7 @@ echo "✅ Kubeconfig configured"
 echo "✅ EC2NodeClass applied"
 echo "✅ OnDemand NodePool applied"
 echo "✅ Spot NodePool applied"
+echo "✅ Open Telemetry EKS Addons applied"
 echo
 echo "Your EKS Cluster with Karpenter is now fully configured and ready to use!"
 echo "==============================="

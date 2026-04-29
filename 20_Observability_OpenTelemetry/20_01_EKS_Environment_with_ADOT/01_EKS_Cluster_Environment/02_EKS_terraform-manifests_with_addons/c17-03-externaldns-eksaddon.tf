@@ -11,12 +11,7 @@ data "aws_eks_addon_version" "externaldns_latest" {
 # Install ExternalDNS Add-on
 ##############################################
 resource "aws_eks_addon" "externaldns" {
-  depends_on = [
-    aws_iam_role.externaldns_role,
-    aws_eks_pod_identity_association.externaldns,
-    aws_eks_addon.podidentity,
-    aws_eks_node_group.private_nodes
-  ]  
+  depends_on = [aws_eks_node_group.private_nodes]  
   cluster_name                = aws_eks_cluster.main.name
   addon_name                  = "external-dns"
   addon_version               = data.aws_eks_addon_version.externaldns_latest.version

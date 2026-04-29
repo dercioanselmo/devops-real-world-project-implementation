@@ -13,5 +13,4 @@ tags = {
   Terraform   = "true"
   Project     = "retail-store"
   Owner       = "Dercio Anselmo"
-  Demo        = "VPC with Remote Backend Demo"
 }

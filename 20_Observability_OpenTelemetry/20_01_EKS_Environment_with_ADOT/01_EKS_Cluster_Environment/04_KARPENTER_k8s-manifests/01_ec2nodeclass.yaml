@@ -12,7 +12,7 @@ spec:
   # Auto-discover subnets (the cluster tags)
   subnetSelectorTerms:
     - tags:
-        # Make sure the worker nodes are provate subnet
+        # Make sure the worker nodes are private subnet
         kubernetes.io/cluster/retail-dev-eksdemo: owned
         kubernetes.io/role/internal-elb: "1"
   # Auto-discover security groups
