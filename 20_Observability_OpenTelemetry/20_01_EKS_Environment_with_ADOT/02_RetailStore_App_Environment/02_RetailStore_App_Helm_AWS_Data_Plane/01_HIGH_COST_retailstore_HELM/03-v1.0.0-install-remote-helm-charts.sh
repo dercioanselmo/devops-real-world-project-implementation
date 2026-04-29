@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# 03-v1.0.0-install-remote-helm-charts.sh
+# Helm Charts which doesn't need Secrets from AWS Secrets Manager
 set -e
 
 echo "============================================"
@@ -29,8 +30,8 @@ echo "--------------------------------------------"
 echo "Step 1/5: Installing Catalog Service..."
 echo "--------------------------------------------"
 helm upgrade --install catalog stacksimplify/retail-store-sample-catalog-chart \
-  --version 2.0.0 \
-  -f values-catalog-v2.0.0.yaml \
+  --version 1.0.0 \
+  -f values-catalog.yaml \
   --wait \
   --timeout 5m
 
@@ -71,8 +72,8 @@ echo "--------------------------------------------"
 echo "Step 4/5: Installing Orders Service..."
 echo "--------------------------------------------"
 helm upgrade --install orders stacksimplify/retail-store-sample-orders-chart \
-  --version 2.0.0 \
-  -f values-orders-v2.0.0.yaml \
+  --version 1.0.0 \
+  -f values-orders.yaml \
   --wait \
   --timeout 5m
 
@@ -127,11 +128,6 @@ kubectl get cm
 echo
 echo "Ingress Service:"
 kubectl get ingress
-
-# Display SecretProviderClass Service
-echo
-echo "List SecretProviderClass"
-kubectl get secretproviderclass
 
 echo
 echo "============================================"

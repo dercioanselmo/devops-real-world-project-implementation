@@ -6,7 +6,7 @@ echo
 # Step 05 - UI Service
 echo "Uninstalling UI Service..."
 helm uninstall ui
-sleep 10
+#sleep 10
 
 # Step 04 - Orders Service
 echo "Uninstalling Orders Service..."
