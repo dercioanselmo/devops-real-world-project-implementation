@@ -114,3 +114,8 @@ podDisruptionBudget:
   enabled: true
   minAvailable: 2      # At least 2 pods must remain available
   maxUnavailable: 0    # Disable maxUnavailable (only minAvailable active)
+
+
+opentelemetry:
+  enabled: true
+  instrumentation: "default-instrumentation"  
