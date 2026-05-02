@@ -1,4 +1,4 @@
-appVersion: argoproj.io/v1alpha1
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: guestbook
@@ -6,9 +6,16 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/dercio.anselmo/argocd-example-apps.git
-    targetRevision: main
-    path: guestbook
+    repoURL: https://github.com/dercioanselmo/argocd-example-apps-labs-private
+    targetRevision: HEAD
+    path: helm-guestbook
+    helm:
+      valueFiles:
+        - values.yaml
+ #   helm:  --> If we want not to prune the previous 
+ #     valuesObject:
+ #       fullnameOverride: guestbook-ui
   destination:
     server: https://kubernetes.default.svc
     namespace: default
+  
