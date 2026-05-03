@@ -6,16 +6,16 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/dercioanselmo/argocd-example-apps-labs-private
+    repoURL: git@github.com:dercioanselmo/argocd-example-apps-labs-private.git
     targetRevision: HEAD
     path: helm-guestbook
-    helm:
-      valueFiles:
-        - values.yaml
  #   helm:  --> If we want not to prune the previous 
  #     valuesObject:
  #       fullnameOverride: guestbook-ui
   destination:
     server: https://kubernetes.default.svc
     namespace: default
-  
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

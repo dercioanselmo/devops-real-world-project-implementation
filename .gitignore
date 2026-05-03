@@ -9,6 +9,9 @@ override.tf
 override.tf.json
 .terraformrc
 terraform.rc
+*.key
+argocd-deploy-key
+argocd-deploy-key.pub
 
 # Keep the lock file
 !.terraform.lock.hcl

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: appProject
+metadata:
+  name: team-finance
+  namespace: argocd
+spec:
+  description: Project for Team Finance with security guards
+  sourceRepos:
+    - 'git@github.com:dercioanselmo/argocd-example-apps-labs-private.git'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: finance
+  #clusterResourceWhitelist:
+  #  - group: "*"
+  #  - kind: "*"
+
+  namespaceResourceWhitelist:
+    - group: "*"
+    - kind: "*"  
