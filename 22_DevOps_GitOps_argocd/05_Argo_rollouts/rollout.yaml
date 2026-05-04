@@ -10,7 +10,7 @@ spec:
   strategy:
     canary:
       steps:
-        - setWeight: 20
+        - setWeight: 40
         - pause: {}
   template:
     metadata:
@@ -22,4 +22,4 @@ spec:
           image: lmacademy/simple-color-app:1.0.0
           env:
             - name: APP_COLOR
-              value: 'red'
+              value: 'orange'
